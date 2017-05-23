@@ -9,6 +9,7 @@ export const completeAll = () => ({ type: types.COMPLETE_ALL })
 export const clearCompleted = () => ({ type: types.CLEAR_COMPLETED })
 
 export function addTodo(text) {
+    console.log("add return,", text)
     return {
         type: types.ADD_TODO,
         text,
@@ -16,6 +17,7 @@ export function addTodo(text) {
 }
 
 export function addTodos(todos) {
+    console.log("get todos,", todos)
     return {
         type: types.ADD_TODOS,
         todos,
@@ -23,7 +25,6 @@ export function addTodos(todos) {
 }
 
 export function addTodoRequest(text) {
-    console.log("!in action add request!");
     return (dispatch) => {
         return callApi('todos', 'post',{
             todo: {
@@ -53,20 +54,20 @@ export function fetchTodos() {
     };
 }
 
-export function completeTodo(cuid) {
+export function completeTodo(todo) {
     return {
         type: types.COMPLETE_TODO,
-        cuid
+        todo
     }
 }
 
 export function completeTodoRequest(cuid) {
     return (dispatch) => {
-        return callApi('todos/${cuid}', 'put',{
+        return callApi(`todos/${cuid}`, 'put',{
             todo: {
-                completed: todo.completed,
+                completed: true, //when it is true, set todo.completed to ! in db
             },
-        }).then(res => dispatch(completeTodo(cuid)))
+        }).then(res => dispatch(completeTodo(res.todo)))
     }
 }
 
@@ -80,7 +81,7 @@ export function editTodo(cuid, text) {
 
 export function editTodoRequest(cuid, text) {
     return (dispatch) => {
-        return callApi('todos/$(cuid)', 'put',{
+        return callApi(`todos/${cuid}`, 'put',{
             todo: {
                 text: text,
             },

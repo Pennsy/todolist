@@ -41,7 +41,7 @@ export default class TodoItem extends Component {
   render() {
     //const { todo, completeTodo, deleteTodo } = this.props
     const { todo, actions} = this.props
-    console.log("!!!in todoitem", todo);
+    //console.log("!!!in todoitem", todo);
     let element
     if (this.state.editing) {
       element = (

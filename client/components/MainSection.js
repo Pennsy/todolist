@@ -12,7 +12,7 @@ const TODO_FILTERS = {
 
 export default class MainSection extends Component {
   static propTypes = {
-    todos: PropTypes.object.isRequired,
+    todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
   }
 
@@ -28,11 +28,11 @@ export default class MainSection extends Component {
 
   renderToggleAll(completedCount) {
     const { todos, actions } = this.props
-    if (todos.data.length > 0) {
+    if (todos.length > 0) {
       return (
         <input className="toggle-all"
                type="checkbox"
-               checked={completedCount === todos.data.length}
+               checked={completedCount === todos.length}
                onChange={actions.completeAll} />
       )
     }
@@ -41,9 +41,9 @@ export default class MainSection extends Component {
   renderFooter(completedCount) {
     const todos = this.props.todos
     const { filter } = this.state
-    const activeCount = todos.data.length - completedCount
+    const activeCount = todos.length - completedCount
 
-    if (todos.data.length) {
+    if (todos.length) {
       return (
         <Footer completedCount={completedCount}
                 activeCount={activeCount}
@@ -55,13 +55,13 @@ export default class MainSection extends Component {
   }
 
   render() {
+    console.log(this.props)
     //console.log(this.props.todos.data);
     const { todos, actions } = this.props
     const { filter } = this.state
-    console.log("todos-data", todos.data)
-    const filteredTodos = todos.data.filter(TODO_FILTERS[filter])
-    console.log("!!! in main!!!", filter,filteredTodos)
-    const completedCount = todos.data.reduce((count, todo) =>
+    const filteredTodos = todos.filter(TODO_FILTERS[filter])
+    console.log('!completed test!',todos);
+    const completedCount = todos.reduce((count, todo) =>
       todo.completed ? count + 1 : count,
       0
     )

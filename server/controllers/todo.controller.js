@@ -12,7 +12,6 @@ import sanitizeHtml from 'sanitize-html';
 export function getTodos(req, res) {
   Todo.find().sort('-dateAdded').exec((err, todos) => {
     if (err) {
-      //console.log("!!! hahahaha ");
       res.status(500).send(err);
     }
     res.json({ todos });
@@ -87,8 +86,8 @@ export function updateTodo(req, res) {
       res.status(500).send(err);
     }
     const updatedTodo = req.body.todo;
-    if(!updatedTodo.text){todo.text = sanitizeHtml(updatedTodo.text);}
-    if(updatedTodo.completed!=undefined){todo.completed = sanitizeHtml(updatedTodo.completed);}
+    if(updatedTodo.text){todo.text = sanitizeHtml(updatedTodo.text);}
+    if(updatedTodo.completed){todo.completed = !todo.completed;}
 
     todo.save(function (err, saved) {
     if (err) return handleError(err);

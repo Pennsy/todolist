@@ -7,19 +7,15 @@ const initialState = [
     cuid: 0
   }
 ]
-export const getTodos = state => state.todos.data;
 
 export default function todos(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
-      return {
-        data:[action.post,...state],
-       };
+      return [action.post,...state];
 
     case ADD_TODOS :
-      return {
-          data: action.todos,
-      };
+      return action.todos;
+
 
     case DELETE_TODO:
       return state.filter(todo =>
@@ -40,6 +36,7 @@ export default function todos(state = initialState, action) {
           todo
       )
 
+
     case COMPLETE_ALL:
       const areAllMarked = state.every(todo => todo.completed)
       return state.map(todo => ({
@@ -54,3 +51,5 @@ export default function todos(state = initialState, action) {
       return state
   }
 }
+
+export const getTodos = state => state.todos;

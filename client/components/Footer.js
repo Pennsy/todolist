@@ -47,12 +47,13 @@ export default class Footer extends Component {
     if (completedCount > 0) {
       return (
         <button className="clear-completed"
-                onClick={onClearCompleted} >
+                onClick={onClearCompleted} hidden="hidden" >
           Clear completed
         </button>
       )
     }
   }
+
 
   render() {
     return (

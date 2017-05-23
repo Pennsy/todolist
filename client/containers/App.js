@@ -16,22 +16,27 @@ const App = ({todos, actions}) => (
 */
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isMounted: false };
+  }
   componentDidMount() {
-    this.props.dispatch(fetchTodos());
+    this.props.actions.fetchTodos();
   };
 
   handleDeleteTodo = todo => {
-    this.props.dispatch(deleteTodoRequest(todo));
+    this.props.actions.deleteTodoRequest(todo);
   };
 
   handleAddTodo = (text) => {
-    console.log("! in app handle add todo !!")
-    this.props.dispatch(addTodoRequest(text));
+    this.props.actions.addTodoRequest(text);
   }
 
   render() {
       return (
         <div>
+        {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
+
           <Header addTodo={this.handleAddTodo} />
           <MainSection todos={this.props.todos} actions={this.props.actions} />
         </div>
