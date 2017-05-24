@@ -40,8 +40,10 @@ export function deleteTodo(cuid) {
     };
 }
 export function deleteTodoRequest(cuid) {
+    return (dispatch) => {
     return callApi(`todos/${cuid}`, 'delete').then(
-                        () => dispatch(deleteTodo(cuid)))
+                        () => dispatch(deleteTodo(cuid)));
+    };
 }
 
 export function fetchTodos() {
