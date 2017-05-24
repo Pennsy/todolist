@@ -11,7 +11,7 @@ const initialState = [
 export default function todos(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
-      return [action.post,...state];
+      return [action.todo,...state];
 
     case ADD_TODOS :
       return action.todos;

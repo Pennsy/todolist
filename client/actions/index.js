@@ -8,16 +8,14 @@ import * as types from '../constants/ActionTypes'
 export const completeAll = () => ({ type: types.COMPLETE_ALL })
 export const clearCompleted = () => ({ type: types.CLEAR_COMPLETED })
 
-export function addTodo(text) {
-    console.log("add return,", text)
+export function addTodo(todo) {
     return {
         type: types.ADD_TODO,
-        text,
+        todo,
     };
 }
 
 export function addTodos(todos) {
-    console.log("get todos,", todos)
     return {
         type: types.ADD_TODOS,
         todos,
@@ -31,7 +29,7 @@ export function addTodoRequest(text) {
                 text: text,
                 completed: false,
             },
-        }).then(res => dispatch(addTodo(text)))
+        }).then(res => dispatch(addTodo(res.todo)))
     }
 }
 
