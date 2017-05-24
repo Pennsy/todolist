@@ -26,7 +26,6 @@ export function getTodos(req, res) {
  * @returns void
  */
 export function addTodo(req, res) {
-  console.log("!!!add in server!!!", req.body)
   if (!req.body.todo.text) {
     res.status(403).end();
   }
