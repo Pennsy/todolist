@@ -26,7 +26,6 @@ export default class TodoTextInput extends Component {
   }
 
   handleChange = e => {
-    console.log("!!!input change!!!")
     this.setState({ text: e.target.value })
   }
 
